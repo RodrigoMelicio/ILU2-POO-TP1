@@ -1,5 +1,7 @@
 package villagegaulois;
 
+import java.util.Iterator;
+
 import personnages.Chef;
 import personnages.Gaulois;
 
@@ -8,7 +10,10 @@ public class Village {
 	private Chef chef;
 	private Gaulois[] villageois;
 	private int nbVillageois = 0;
-
+	private Marche marche;
+	
+	
+	
 	public Village(String nom, int nbVillageoisMaximum) {
 		this.nom = nom;
 		villageois = new Gaulois[nbVillageoisMaximum];
@@ -20,6 +25,47 @@ public class Village {
 
 	public void setChef(Chef chef) {
 		this.chef = chef;
+	}
+	
+	private class Marche {
+		private Etal[] etals;
+
+		public Marche(int nbEtals) {
+			etals = new Etal[nbEtals];
+			for (int i = 0; i < etals.length; i++) {
+				etals[i] = new Etal();
+			}
+		}
+		
+		
+		private void utiliserEtal(int indiceEtal, Gaulois vendeur, String produit, int nbProduit) {
+			etals[indiceEtal].occuperEtal(chef, produit, nbProduit);
+		}
+		
+		
+		private int trouverEtalLibre() {
+			for (int i = 0; i < etals.length; i++) {
+				if (!etals[i].isEtalOccupe()) {
+					return i;
+				}
+			}
+			return -1;
+		}
+		
+		
+		private int trouverEtals(String produit) {
+			int compteur = 0;
+			for (int i = 0; i < etals.length; i++) {
+				if (etals[i].isEtalOccupe() && etals[i].contientProduit(produit)) {
+					compteur++;
+				}
+			}
+			
+			int indice = 0;
+			for
+		}
+		
+		
 	}
 
 	public void ajouterHabitant(Gaulois gaulois) {
